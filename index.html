@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Exercise 3</title>
+        <script type="text/javascript">
+            var xmlhttp = new XMLHttpRequest()
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var myObj = JSON.parse(this.responseText);
+                    var planets = myObj.results;
+                    var planets_table = "";
+
+
+                    for (planet of planets) {
+                        console.log(planet.name);
+                        planets_table += "<tr><td>" + planet.name + "</td>" + "<td>" + planet.rotation_period + "</td>" + "<td>" + planet.diameter + "</td>" + "<td>" + planet.population + "</td></tr>";
+                    }
+
+                    document.getElementById("demo").innerHTML =
+                        "<tr><th>Name</th><th>Rotation period</th><th>Diameter</th><th>Population</th></tr>" + planets_table;
+                }
+            };
+            xmlhttp.open("GET", "https://swapi.co/api/planets/", true);
+            xmlhttp.send();
+    </script>
+    <style>
+        h1 {
+            text-align: center;
+            color: white;
+        }
+        
+        div {
+            background-color: #1F2326;
+            margin: 0px 0px 20px 0px;
+        }
+    </style>
 </head>
 <body>
-    <center>
-        <h1>Daftar Planet</h1>
-    </center>
+        <div>
+            <h1>Planet dan infornya</h1>
+            <table id="demo" border="= 1" class="table table-dark">
+
+            </table>
+        </div>
 </body>
 </html>
